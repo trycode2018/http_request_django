@@ -12,5 +12,13 @@
                 <li>{{ pessoa.id }} - {{ pessoa.nome }}</li>
             {% endfor %}
         </ul>
+
+        <form action="{% url 'salvar' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="nome" placeholder="digite um nome">
+            <button type="submit" name="enviar">Salvar</button>     
+        </form>
     </body>
 </html>
+
+
