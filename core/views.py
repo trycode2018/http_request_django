@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Pessoa
 
 # Create your views here.
@@ -12,4 +12,16 @@ def salvar(request):
     Pessoa.objects.create(nome=get_nome)
     pessoas = Pessoa.objects.all()
     return render(request,"index.html",{"pessoas":pessoas})
+
+def editar(request,id):
+    pessoa = Pessoa.objects.get(id=id)
+    return render(request,'update.html',{'pessoa':pessoa})
+
+def update(request,id):
+    nome = request.POST.get('nome')
+    pessoa = Pessoa.objects.get(id=id)
+    pessoa.nome = nome
+    pessoa.save()
+    return redirect(home)    
+    
     
